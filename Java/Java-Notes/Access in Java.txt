@@ -1,0 +1,172 @@
+package aceessInJava;
+
+public class AccessClass {
+	
+	public int i = 20;					//accessible over whole project - all package & all classes
+	public static int j = 30;
+	
+	private String s = "Batch-7";		//accessible only within the same class
+	private static String str = "Testing";
+	
+	protected double d = 20.22;			//accessible within the same package but can be inherited
+	protected static double dbl = 55.55;
+	
+	char c = 'A';						//accessible only within the same package 
+	static char chr = 'B';
+	
+	final boolean flag = true;
+	final static boolean flag1 = false;
+	
+	public void publicMethod() {
+		System.out.println("I am non-static public method");
+	}
+	
+	public static void publicMethod1() {
+		System.out.println("I am static public method-1");
+	}
+	
+	private void privateMethod() {
+		System.out.println("I am non-static private method");
+	}
+	
+	private static void privateMethod1() {
+		System.out.println("I am static private method-1");
+	}
+	
+	protected void protectedMethod() {
+		System.out.println("I am non-static protected method");
+	}
+	
+	protected static void protectedMethod1() {
+		System.out.println("I am static protected method-1");
+	}
+	
+	void defaultdMethod() {
+		System.out.println("I am non-static default method");
+	}
+	
+	static void defaultMethod1() {
+		System.out.println("I am static default method-1");
+	}
+	
+	final public void publicFinal() {
+		System.out.println("I am public final method");
+	}
+	
+	final public static int publicFinal1() {
+		System.out.println("I am public static final method-1");
+		return 10;
+	}	
+
+	public static void main(String[] args) {
+		AccessClass obj = new AccessClass();
+		System.out.println(obj.s);
+		System.out.println(AccessClass.str);
+		obj.publicMethod();
+		AccessClass.publicMethod1();
+		obj.privateMethod();
+		AccessClass.privateMethod1();
+		obj.defaultdMethod();
+		AccessClass.defaultMethod1();
+		
+//		obj.flag = false;
+//		AccessClass.flag1= false;
+
+	}
+
+}
+------------------------------------------------------------------------------------------
+
+package aceessInJava;
+
+public class AccessClass1 {
+
+	public static void main(String[] args) {
+		AccessClass obj = new AccessClass();
+		System.out.println(obj.i);				//non-static variables with public modifier in same package
+		System.out.println(AccessClass.j);		//static variables with public modifier in same package
+		
+//		System.out.println(obj.s); 				//non-static variables with private cannot be used outside of class
+//		System.out.println(AccessClass.str); 	//static variables with public modifier cannot be used outside of class
+		
+		System.out.println(obj.d);				//non-static variable with protected access within same package but diff. class
+		System.out.println(AccessClass.dbl);	//static variable with protected access within same package but diff. class
+
+		System.out.println(obj.c);
+		System.out.println(AccessClass.chr);
+		
+//		obj.privateMethod();
+//		AccessClass.privateMethod1();	
+		
+		obj.protectedMethod();
+		AccessClass.publicMethod1();
+		
+		obj.defaultdMethod();
+		AccessClass.defaultMethod1();
+		
+	}
+
+}
+
+----------------------------------------------------------------------------------------------
+
+import aceessInJava.AccessClass;
+public class AccessClass2 {
+
+	public static void main(String[] args) {
+		AccessClass obj = new AccessClass();
+		System.out.println(obj.i);
+		System.out.println(AccessClass.j);
+		obj.publicMethod();
+		AccessClass.publicMethod1();
+
+	}
+
+}
+----------------------------------------------------------------------------------------------
+package testPackage;
+
+import aceessInJava.AccessClass;
+
+public class TestClass {
+
+	public static void main(String[] args) {
+		AccessClass obj = new AccessClass();
+		System.out.println(obj.i);             //non-static variable with public access modifier in different package
+		System.out.println(AccessClass.j);		//static variable with public access modifier in different package
+
+//		System.out.println(obj.d);				//non-static variable with protected access within diff package cannot be used
+//		System.out.println(AccessClass.dbl);	//static variable with protected access within diff package cannot be used
+		
+		obj.publicMethod();
+		AccessClass.publicMethod1();
+		
+//		obj.protectedMethod();
+//		AccessClass.protectedMethod1)();		
+		
+	}
+
+}
+--------------------------------------------------------------------------------------------------
+package testPackage;
+
+import aceessInJava.AccessClass;
+
+public class TestClass1 extends AccessClass {
+
+	public static void main(String[] args) {
+		TestClass1 obj = new TestClass1();
+		System.out.println(obj.d);		//non-static variable with protected access within diff package can be used with inheritance
+		System.out.println(TestClass1.dbl); //static variable with protected access within diff package can be used with inheritance
+		
+//		System.out.println(obj.c);		//non-static variable with default access within diff package cannot be used
+//		System.out.println(TestClass1.chr); //static variable with default access within diff package cannot be used
+	
+		obj.protectedMethod();
+		TestClass1.protectedMethod1();
+		
+//		obj.defaultClass();
+//		TestClass1.defaultClass1();
+	}
+
+}

@@ -1,0 +1,122 @@
+package typesOfClass;
+
+public class ConcreteClass {
+	int a = 100;
+	String str = "Batch-07";
+	private double dbl = 20.222;
+	
+	public void method1() {
+		System.out.println("Integer: " + a);
+	}
+	
+	public void method2() {
+		System.out.println("Stirng: " + str);
+	}
+	
+	private void method3() {
+		System.out.println("Double: " + dbl);
+	}
+}
+-------------------------------------------------------
+package typesOfClass;
+
+public abstract class AbstractClass {
+	
+	int a;
+	boolean flag;
+	double dbl = 200.100;
+	
+	public void method4() {
+		System.out.println("I am complete method");
+	}
+	
+	public void method6() {
+		System.out.println("I am complete method");
+	}
+	
+	public abstract void method5();			//atleat one abstract method is required	
+}
+
+---------------------------------------------------------------
+package typesOfClass;
+
+public class AbstarctImplementation extends AbstractClass {
+	public void method5() {
+		System.out.println("My implementation is now complete");
+	}
+}
+--------------------------------------------------------------
+
+package typesOfClass;
+
+public interface DemoInterface {
+	
+	int i = 100;   //variables are by default public-static-final
+	String str = "I am Interface";
+	
+	public void method7();
+	
+	public abstract void method8();
+	
+//	public static method9();    //static declaration of method is not allowed
+	
+//	private void method9();    //private declaration are not allowed
+}
+---------------------------------------------------------------
+
+package typesOfClass;
+
+public class InterfaceImplementation implements DemoInterface {
+	static int i;
+	
+	public void method7() {
+		System.out.println("I am method-7..now completed");
+	}
+	
+	public void method8() {
+		System.out.println("I am method-8..now completed");
+	}
+	
+	public void method9() {
+		System.out.println("I am default complete method of class InterfaceImplementation");
+	}
+}
+----------------------------------------------------------------------
+package typesOfClass;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		ConcreteClass obj = new ConcreteClass();
+		obj.method1();
+		obj.method2();
+		
+//		AbstractClass obj1 = new AbstractClass();	//object of abstract class cannot be created
+		
+		AbstarctImplementation obj2 = new AbstarctImplementation();
+		obj2.method4();
+		obj2.method5();
+		obj2.method6();
+		
+//		DemoInterface obj4 = new DemoInterface(); //object of interface cannot be created
+		InterfaceImplementation obj5 = new InterfaceImplementation();
+		DemoInterface obj6 = new InterfaceImplementation();  //create object of interface with implementation class
+		
+		//Accessing all methods of implementation class
+		obj5.method7();
+		obj5.method8();
+		obj5.method9();
+		
+		//Accessing only methods of Interface
+		obj6.method7();
+		obj6.method8();
+		
+		//Variables in interface are by default public-static-final & initialized
+//		obj6.i=200;  
+//		obj6.str="Overriding value";
+
+	}
+
+}
+
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="astasoft.flipkart.TestClasses.Sample3">
+        <methods>
+          <include name="runAfterEachTestClass"/>
+          <include name="runBeforeEachTestClass"/>
+          <include name="testMethod8"/>
+          <include name="runBeforeWholeSuite"/>
+          <include name="testMethod9"/>
+          <include name="testMethod10"/>
+          <include name="runAfterWholeSuite"/>
+        </methods>
+      </class> <!-- astasoft.flipkart.TestClasses.Sample3 -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -1,0 +1,378 @@
+Terminologies:
+----------------------------------------------------------------------------------
+API--> Application Programming Interface
+	*It is an computing interface to interact between multiple softwares 
+	*Why to use?:
+		i. to establish communication between legacy & new applications
+		ii.to interact between two applications developed on different technologies
+		iii.to provide service to another application without exposing actual code
+----------------------------------------------------------------------------------
+Types of API:
+1. SOAP--> Simple Object Acess Protocol
+	*It is a protocol
+	*supports only xml
+	*data cannot be cached
+	*requires more resources & bandwidth
+	*inbuilt ACID compilation
+	*uses JAX-WS java API
+	*by default stateless but can be stateful if designed so.
+2. REST--> Representational State Transfer
+	*It is architectural style
+	*supports xml, json, html & plaintext
+	*data can be cached
+	*requires less resources & bandwidth
+	*lack of ACID compilation
+	*uses JAX-RS java API
+	*it is a stateless service (server does not keep track of the user who uses the API)
+-----------------------------------------------------------------------------------
+Webservices--> services over network/internet
+-----------------------------------------------------------------------------------
+***********************************************************************************
+SOAP terminologies:
+1.WSDL--> Web Service Description Language
+	*Contains elements - type, message, portType, binding
+2.UDDI--> Universal Description Discovery Language
+3.XML-->Extensible Markup Language
+-----------------------------------------------------------------------------------
+SOAP Testing Procedure:
+WSDL (XML File) -->SOAP UI tool--> Request (with input)--> Response(Envelop,Header,Body,Fault)
+--> Assertion(Valid/Invalid) & Response time (milliseconds)
+-----------------------------------------------------------------------------------
+***********************************************************************************
+REST Terminologies:
+1. HTTP--> Hyper Text Transport Protocol
+2. HTTPS--> Hyper Text Transport Protocol over Secured connection
+3. URI--> Universal Resource Identifier
+		*URI= URL+ (Path/Query parameter) 
+		*e.g. http://www.amazon.com/orders/112 OR http://www.amazon.com/order?ord=123
+4. URL--> Universal Resource Locator
+		*URL=Protocol+Host+Resource
+		*e.g. https://www.amazon.com/order
+5. JSON--> JavaScript Object Notation
+-----------------------------------------------------------------------------------
+Useful Terms in REST API testing: 
+*Base URL--> address of an API hosted on a server
+	*e.g.https://www.amazon.com
+*Resources--> represents the source of information on a server
+	*e.g. https://www.amazon.com/order
+*Endpint--> the point of entry in a communication channel when two systems are interacting
+	*Endpoint = Base URL + Resources + Optional parameters (query/path)
+	*e.g. http://www.amazon.com/orders/112 OR http://www.amazon.com/order?ord=123
+-----------------------------------------------------------------------------------
+***********************************************************************************
+REST Assured: 
+*a Java library
+*provides a domain-specific language (DSL) for writing powerful, maintainable tests for RESTful APIs
+*supports gherkin terms --> 
+	1. given()-->  pre-condition
+	2. when() -->  action
+	3. then() -->  response/post-condition (validation/assertions)
+-----------------------------------------------------------------------------------
+*Important methods in REST Assured:
+	1. GET --> get(<api endpoint>)  --> to retrieve information from server
+	2. POST --> post(<api endpoint>) --> to create information on server
+	3. PUT --> put(<api endpoint>)  --> to update information on server
+	4. DELETE --> delete(<api endpoint>) --> to delete information on the server
+	5. OPTION --> option(<api endpoint>)
+	6. PATCH --> patch(<api endpoint>) --> to update/change certain peice of information on server 
+	7. HEAD --> head(<api endpoint>)
+-----------------------------------------------------------------------------------
+*Parameters in REST Assured:
+	1. Query parameter --> to locate certain content from resource 
+		*always being used to retrieve data with GET call
+		*e.g. <Base URI>?ord=123
+	2. Path parameter --> to locate the path of resources on the server
+		*can be used with any call (GET/POST/PUT/DELETE)
+		*e.g.<Base URI>/orders/112
+	3. Form parameter --> additional parameter to authenticate/locate the server
+		*can be used only with POST/PUT calls
+		*e.g.<Base URI>/user=sam&password=xyz
+-----------------------------------------------------------------------------------
+*Authentication --> who are you? (username, password, token)
+*Authorization --> do you have permission?? (if server allows you to perform certain task?)
+	*Types authorization mechanism
+		1. Basic: 
+		   Flow: authorization request using (username & Password) --> resources
+		2. Tokenized (JWT - Json Web based Token e.g. Bearer token)
+		   Flow: Authorization request(with userName & Password)--> generate access Token --> resources
+		3. OAuth2.0 
+		   Flow: app --> Authorization request --> user --> grant
+				 --> Authorization server --> grant
+				 --> Protected resources --> grant
+				 --> app --> user
+-----------------------------------------------------------------------------------
+*Metadata --> data to provide information about server & associated operational details
+*Header --> Metadata to send/receive additional information with 'HTTP requests' or 'HTTP response' 
+			in API call (if used, mandatory field is "Content-type")
+*Cookies --> an 'HTTP request' header (used in the requests sent by the user to the server)
+*Schema -->  metadata that tells us how our data is structured (e.g JSON schema, XML schema etc.)
+-----------------------------------------------------------------------------------
+*API Contract --> all required information to test any API
+	i.e. Base URL + Resources + Parameters (query/path) + HTTP methods + Sample body + Sample response
+*Swagger --> open-source tools built around the OpenAPI Specification 
+		 --> helps to design, build, document and consume REST APIs
+		 --> contains all required API contract fields along with dummy execution facility
+-----------------------------------------------------------------------------------
+*Important HTTP status/response codes:
+	1. 2xx: Successful
+		*200 --> Ok or Valid
+		*201 --> Created
+		*202 --> Accepted
+		*204 --> No Content
+	2. 3xx: Redirected
+		*302 --> temporary redirected
+	3. 4xx: Unsuccessful
+		*400 --> Bad request
+		*401 --> Unauthorized
+		*402 --> Payment required
+		*403 --> Forbidden 
+		*404 --> Not found
+		*405 --> Method not allowed
+		*408 --> Request timeout
+	4. 5xx: Server Errors
+		*500 --> Internal Server Error
+		*502 --> Bad Gateway
+		*503 --> Service Unavailable
+		*504 --> Gateway Timeout
+-----------------------------------------------------------------------------------
+*JSONPath --> query language to extract desired content from json body
+		  --> useful site, https://www.jsonpathfinder.com or add chrome extension --> json path finder
+	Syntax: 
+		$ --> root object --> e.g. $..author = all authors
+		@ --> current object --> e.g. $..book[(@.length-1)]= the last book
+		. --> child object --> e.g. $.store..price =price of everything in store
+		[] --> child of current object (by name / by index) --> e.g. $..book[2] = the third book
+		* --> return all objects --> e.g. $..* = all elements in JSON body
+		, --> union of objects  
+		: --> array slice --> e.g. $..book[:2]=first two books
+		() --> pass the script expression
+		?() --> query with condition --> $..book[?(@.price<10)]= filter all books cheaper than 10
+-----------------------------------------------------------------------------------
+*JSON foramt --> 
+   {
+	"Emp": {
+			"id":"1",
+			"name":"john"
+			"address": [
+						{
+						 "Building":"ABC",
+						 "City":"XYZ",
+						 "Country":"LMN"
+						},
+						{
+						 "Building":"CDE",
+						 "City":"UVW",
+						 "Country":"IJK"
+						}
+					   ]
+		   }
+	}
+-----------------------------------------------------------------------------------
+Test Automation with RestAssured & JAVA:
+*Required dependacies/jars -->
+	1. rest-assured
+	2. json-path
+	3. xml-path
+	4. json-schema-validator
+	5. java-hamcrest
+	6. poi, poi-ooxml, poi-ooxml-schemas
+	7. json-simple
+	8. testng
+-----------------------------------------------------------------------------------
+* Important Interfaces in RestAssured:
+	1. Response
+	2. Extractable Response
+	3. ResponseAwareMatcher
+	4. Filter
+-----------------------------------------------------------------------------------
+*Important imports in RestAssured programming:
+	import static io.restassured.RestAssured.*;
+	import static org.hamcrest.Matchers.*;
+-----------------------------------------------------------------------------------
+*Basic test examples:
+	1. GET call: 
+		--> URI under test--> https://reqres.in/api/users?page=2
+		--> Response response = given().baseUri("https://reqres.in/").queryParam("page",2)
+								.when().get("api/users")
+								.then().log().all()
+								.assertThat().statusCode(200)
+								.extract().response();
+			int statusCode = response.getStatusCode();
+			int statusLine = response.getStatusLine();
+			String body = response.getBody().asString();
+			String header = response.getHeader("content-type");
+	2. POST call:
+		--> URI under test--> https://reqres.in/api/users
+		--> Map<String, Object> map = new HashMap<>();
+			map.put("name", "morpheus");
+			map.put("job", "leader");
+			baseUri("https://reqres.in");
+			Response response = given().body(map).contentType(ContentType.JSON).accept(ContentType.JSON)
+								.when().post("/api/users")
+								.then().log().all()
+								.body("name", is("morpheus")).body("job",is("leader"))
+								.assertThat().statusCode(201)
+								.extract.response();
+	3. PUT call:
+		--> URI under test--> https://reqres.in/api/users/2
+		--> Map<String, Object> map = new HashMap<>();
+			map.put("name", "morpheus");
+			map.put("job", "zion resident");
+			baseUri("https://reqres.in");
+			Response response = given().body(map).pathParameter("userNo","users/2")
+								.header("Content-Type","application/json").accept(ContentType.JSON)
+								.when().post("/api/{userNo}")
+								.then().log().all()
+								.body("name", is("morpheus")).body("job",equalTo("zion resident"))
+								.assertThat().statusCode(201)
+								.extract.response();
+	4. PATCH call:
+		--> URI under test--> https://reqres.in/api/users/2
+		--> Map<String, Object> map = new HashMap<>();
+			map.put("name", "morpheus");
+			map.put("job", "zion resident");
+			baseUri("https://reqres.in");
+			Response response = given().body(map).pathParameter("userNo","users/2")
+								.header("Content-Type","application/json").accept(ContentType.JSON)
+								.when().patch("/api/{userNo}")
+								.then().log().all()
+								.body("name", is("morpheus")).body("job",equalTo("zion resident"))
+								.assertThat().statusCode(201)
+								.extract.response();
+	5. DELETE call:
+		--> URI under test--> https://reqres.in/api/users/2
+		--> baseUri("https://reqres.in");
+			given().pathParameter("userNo","user/2")
+			.when().delete()
+			.then().statusCode(204).log().all();
+		
+-----------------------------------------------------------------------------------
+*Operations on Response in RestAssured:
+	1. Extraction --> extract the desired entity from HTTP call 
+		.extract() --> response(), statusCode(), body(), contentType(), header/s(),
+							cookie/s(), sessionId(), statusLine(), time() etc.
+	2. Verification --> check if response meets certain condition without any assertion (soft assertion)
+					--> generally contains ValidatableResponse methods that requires Matchers 
+					    for validation
+		.then() --> statusCode(), body(), contentType(), header/s(),
+							cookie/s(), sessionId(), statusLine(), time() etc.
+	3. Validation --> check if response meets desired condition (hard assertion)
+				  --> if the validation is failed, it terminates remaining execution
+		.assertThat() --> statusCode(), body(), contentType(), header/s(), spec()
+							cookie/s(), sessionId(), statusLine(), time() etc.		  
+	4. Logging --> print the response or entities of response in the console
+		.log() --> all(), body(), headers(), cookies(), everything(), status()
+		log with conditions --> ifError(), ifValidationFails(), ifStatusCodeEqualTo()
+-----------------------------------------------------------------------------------	
+*Matchers used in RestAssured:
+	Matchers. -->
+		1. is(), isA(), equalTo(), equalToIgnoreCase(), equalToCompressingWhiteSpace()
+		2. contains(), containsInAnyOrder(), containsString(), containsStringIgnoringCase()
+		3. any(), anyOf(), both(), either()
+		4. allOf()
+		5. anything()
+		6. arrayContaining(), arrayContainingInAnyOrder(), arrayWithSize()
+		7. blankOrNullString(), empty(),emptyArray(), emptyOrNullString()
+		8. closeTo(), comparesEqualTo()
+		9. startsWith(), endsWith()
+		10. greaterThan(), greaterThanOrEqualTo(), lessThan(), lessThanOrEqualTo()
+		11. hasValue(), hasItem(), hasItems(), hasLength(), hasSize(), hasItemInArray()
+		12. matchesPattern()
+		13. not, notANumber(), notNullValue()
+		14. nullValue(),
+-----------------------------------------------------------------------------------	
+*Validating Schema in RestAssured:
+  **Validating JSON schema:
+	--> visit https://www.liquid-technologies.com/online-json-to-schema-converter
+	--> copy your json payload to JSON Document to check if it is valid JSON & create its schema
+	--> copy the created schema --> go to target folder of of your project--> create schema.json under resources folder
+	--> paste copied schema into schema.json file & save it
+	--> Example:
+		given().baseUri("https://reqres.in/").queryParam("page",2)
+			.when().get("api/users")
+			.then().statusCode(200).assertThat().body(matchesJsonSchemaInClassPath("schema.json"));		
+-----------------------------------------------------------------------------------	
+*Creating fake REST api for testing:
+	*Download & install node.js from https://nodejs.org/en/download/
+	*Download & install json-server from https://github.com/typicode/json-server
+		*navigate in command prompt to extracted folder of json-server
+		*use command to install --> npm install -g json-server
+		*start json server using command --> json-server --watch db.json
+			--> by default it will create db.json with some data that can be invoked from 
+				http://localhost:3000/
+		*edit db.json for desired json content and use api "http://localhost:3000/{query or path parameter}"
+-----------------------------------------------------------------------------------	
+*Testing SOAP api with REST assured:
+	*additional dependacy required --> apache-commons
+	--> **can use chrome extention "whistler" to browse the WSDL (optional)
+	--> Service under test (WSDL file) = http://www.dneonline.com/calculator.asmx
+	--> create a new text file say Add.xml under any folder of project & paste the XML request body in it.
+	--> add some values for variables to add in Add.xml & save it.
+	--> Example:
+			FileInputStream file = new FileInputStream("<path of Add.xml>");
+			String request = IOUtils.toString(file, "UTF-8");
+			baseUri = "http://www.dneonline.com";
+			Response response =given().contentType("text/xml").accept(ContentType.XML).body(request)
+				.when().post("/calculator.asmx")
+				.then().statusCode(200).log().all().extract().response();	
+-----------------------------------------------------------------------------------				
+*Validating SOAP response using xpath:
+	--> open xpath tester at https://www.freeformatter.com/xpath-tester.html
+	--> copy the content of log in console as XML Input, select Xpath expression as "//*:AddResult/text()"
+		--> click TEST XPATH, it should show the value the result of addition performed			
+	--> Example:
+			response.body("//*:AddResult.text()",equalTo("5"))
+-----------------------------------------------------------------------------------	
+ **Validating XML schema (XSD):
+	--> visit https://www.freeformatter.com/xsd-generator.html
+	--> copy your XML request and paste in XML document window & click Generate XSD 
+	--> copy the XSD string --> create new file say "test.xsd" in resources folder --> paste & save it.
+	--> Example:
+		FileInputStream file = new FileInputStream("<path of Add.xml>");
+			String request = IOUtils.toString(file, "UTF-8");
+			baseUri = "http://www.dneonline.com";
+			given().contentType("text/xml").accept(ContentType.XML).body(request)
+				.when().post("/calculator.asmx")
+				.then().statusCode(200).log().all().extract().response();
+				.and().body("//*:AddResult.text()",equalTo("5"))
+				.assertThat().body(RestAssuredMatchers.matchesXsdInClassPath("test.xsd"));
+-----------------------------------------------------------------------------------	
+* How to save session & apply it to next HTTP/S request?
+	--> create a object of class "SessionFilter".
+	--> capture the current session into this object using method "filter()" which should be used
+		under .given() statement only.
+	--> apply this saved session to any subsequent request just by using "filter()" method anywhere in the request
+	--> Example:
+			SessionFilter session = new SessionFilter();
+			//********capture the session here***********
+			given().filter(session).baseUri("https://reqres.in/").queryParam("page",2)
+				   .when().get("api/users")
+				   .then().log().all()
+		   //********use the session here******
+		    Map<String, Object> map = new HashMap<>();
+			map.put("name", "morpheus");
+			map.put("job", "leader");
+			baseUri("https://reqres.in");
+			given().filter(session).body(map).contentType(ContentType.JSON).accept(ContentType.JSON)
+				.when().post("/api/users")
+				.then().log().all()
+-----------------------------------------------------------------------------------				
+*Handling HTTPS requests in RestAssured:
+	--> use the method "relaxedHttpsValidation()" as pre-condition under the given()statement only.
+	--> Example:
+			given().relaxedHttpsValidation().baseUri("https://reqres.in/").queryParam("page",2)
+				   .when().get("api/users")
+				   .then().log().all()
+-----------------------------------------------------------------------------------
+*How to send Files in POST call?
+	--> save the file under resources folder say "test.txt".
+	--> pass the file in given() statement as request parameter using method "multiPart()"
+	--> Example:
+			File file = new File("test.txt");
+			given().miltiPart("file",file).contentType(ContentType.JSON).accept(ContentType.JSON)
+				.when().post("/api/users")
+				.then().log().all()
+-----------------------------------------------------------------------------------
+*Serialization & Deserialization in RestAssured:
+	--> Serialization = coverting JSON object into stream (bytes) of data
+	--> DeSerialization = converting JSON responses into classes

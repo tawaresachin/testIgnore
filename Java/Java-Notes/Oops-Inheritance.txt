@@ -1,0 +1,114 @@
+package oops;
+
+public class Parent1 {
+	
+	public int i = 100;
+	
+	public void parent1Method() {
+		System.out.println("I am parent1 method");
+	}
+
+}
+--------------------------------------------------------
+package oops;
+
+public class Parent2 {
+	public int h = 50;
+	
+	public void parent1Method() {
+		System.out.println("I am parent2 method");
+	}
+
+}
+--------------------------------------------------------
+package oops;
+
+public class Child1 extends Parent1{
+	int j = 200;
+	static String str = "Batch-7";
+	
+	public void child1Method() {
+		System.out.println("I am child-1 method");
+	}
+	
+	// to access super class members in subclass -> Keyword = super
+	public void child1SuperAccess() {
+		System.out.println("I am super class variable: " + super.i);
+	}
+	
+	// to access same class non-static variable without object -> Keyword= this
+	public void child1ThisAccess() {
+		System.out.println("I am this class variable: " + this.j);
+	}
+	
+	// to access same class static variable -> Classname.variablename
+	public void child1StaticAccess() {
+		System.out.println("I am static variable of current class: " + Child1.str);
+	}
+}
+-----------------------------------------------------------
+package oops;
+
+public class Child2 extends Child1 {
+	int k = 300;
+	
+	public void child2Method() {
+		System.out.println("I am child2 method");
+	}
+}
+------------------------------------------------------------
+package oops;
+
+public class Child3 extends Parent1 {
+	int l = 400;
+	
+	public void child3Method() {
+		System.out.println("I am child3 method");
+	}
+}
+--------------------------------------------------------------
+package oops;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+	
+		//**************Inheritance- Single level (1 parent --> 1 Child)
+		Child1 child1Obj = new Child1();
+		System.out.println("variable from parent1 -->" + child1Obj.i);
+		System.out.println("variable from child1 -->" + child1Obj.j);
+		child1Obj.parent1Method();
+		child1Obj.child1Method();
+		
+		//***************Multi-level inheritance - one to one  (.....grandparent --> parent --> child)
+		Child2 child2Obj = new Child2();
+		System.out.println("variable from parent1 -->" + child2Obj.i);
+		System.out.println("variable from child1 -->" + child2Obj.j);
+		System.out.println("variable from child2 -->" + child2Obj.k);
+		child2Obj.parent1Method();
+		child2Obj.child1Method();
+		child2Obj.child2Method();
+		
+		//*************Hybrid inheritance - many to one (multiple child & single parent)
+		Child3 child3Obj = new Child3();
+		
+		// child1		
+		System.out.println("variable from parent1 -->" + child1Obj.i);
+		System.out.println("variable from child1 -->" + child1Obj.j);
+		child1Obj.parent1Method();
+		child1Obj.child1Method();
+		child1Obj.child1SuperAccess();
+		child1Obj.child1ThisAccess();
+		child1Obj.child1StaticAccess();
+		
+		//child3
+		System.out.println("variable from parent1 -->" + child3Obj.i);
+		System.out.println("variable from child3 -->" + child3Obj.l);
+		child3Obj.parent1Method();
+		child3Obj.child3Method();
+		
+		//********Multiple inheritance -one to many(one child- multiple parents)- not possible -> Diamond ambiguity
+		
+		}
+	}
+	

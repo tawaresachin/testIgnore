@@ -1,0 +1,149 @@
+package seleniumPerticular;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+public class Parameterization {
+	
+	//1. Parameterization using properties file
+	public static String readProperty(String path, String key) {
+		String value = null;
+		try {
+			FileInputStream file = new FileInputStream(path);
+			Properties prop = new Properties();
+			prop.load(file);
+		    value = prop.getProperty(key);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return value;
+	}
+	
+	//2. Parameterization using Excel file --> External jar "Apache POI"
+	public static Object readExcel(String path, int rowNo, int colNo) {
+		Object value = null;
+		try {
+			FileInputStream file = new FileInputStream(path);
+			//to open excel file
+			Workbook workbook = WorkbookFactory.create(file);  
+			//To open sheet
+			Sheet sheet = workbook.getSheet("Sheet1");
+			//to get the desired row
+			Row row = sheet.getRow(rowNo);
+
+			// to get desired cell at desired row & column
+			Cell cell = row.getCell(colNo);
+			
+			// to get lastRow number in a sheet
+//			int lastRow = sheet.getLastRowNum();
+			
+			// to get lastColumn in sheet
+//			short lastCol = row.getLastCellNum();
+			
+//			Cell cell = WorkbookFactory.create(file)
+//					.getSheet("Sheet1")
+//					.getRow(rowNo)
+//					.getCell(colNo);
+			
+			//to get type of value in located cell
+			CellType type = cell.getCellType();
+			
+			if(type.equals(CellType.STRING)) {
+			 value = cell.getStringCellValue();
+			}
+			if(type.equals(CellType.NUMERIC)) {
+			 value = cell.getNumericCellValue();
+			}
+			if(type.equals(CellType.BOOLEAN)) {
+			 value = cell.getBooleanCellValue();
+			}	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return value;
+	}
+
+}
+
+-----------------------------------------------------------------------------
+package seleniumPerticular;
+
+public class Constants {
+	public static final String ENVIRONMENT_PROPERTIES = "D:\\Study\\Testing Class\\Java\\Batch7\\Batch7Selenium\\src\\Resources\\Environment.properties";
+	public static final String TEST_DATA="D:\\Study\\Testing Class\\Java\\Batch7\\Batch7Selenium\\src\\Resources\\testData.xlsx";
+}
+
+-------------------------------------------------------------------------------------------
+
+package seleniumPerticular;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class TestParameterization extends BaseClass{
+
+	public static void main(String[] args) throws InterruptedException {
+		String browser = Parameterization.readProperty(Constants.ENVIRONMENT_PROPERTIES, "browser");
+		String url = Parameterization.readProperty(Constants.ENVIRONMENT_PROPERTIES, "url");
+		WebDriver driver = intialisation(browser);
+		//open desired url 
+		driver.get(url);
+		WebElement userName = driver.findElement(By.xpath("//input[@id='email']"));
+		WebElement password = driver.findElement(By.xpath("//input[@id='pass']"));
+		
+		for(int i=1; i<4; i++) {
+			Object user = Parameterization.readExcel(Constants.TEST_DATA, i, 0);
+			Object pass= Parameterization.readExcel(Constants.TEST_DATA, i, 1);
+			userName.clear();
+			userName.sendKeys((String)user);
+			Thread.sleep(2000);
+			password.clear();
+			password.sendKeys((String)pass);
+		}
+		
+		//********To quit browser
+		Thread.sleep(5000);
+		driver.quit();
+	}
+}
+-------------------------------------------------------------------------------------------
+package seleniumPerticular;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+
+public class BaseClass {
+	
+	/* To initialise/instantiate desired browser driver instance*/
+	public static WebDriver intialisation(String browser) {
+		WebDriver drv = null;
+		if(browser.equals("chrome")) {
+			//language binding & to locate and initialize browser specific driver
+			System.setProperty("webdriver.chrome.driver", "D:\\Study\\Drivers\\Batch7\\chromedriver_win32\\chromedriver.exe");
+			//create browser specific driver object
+			drv = new ChromeDriver();      // to trigger browser pointed by driver
+		}
+		if (browser.equals("edge")) {
+			System.setProperty("webdriver.edge.driver", "D:\\Study\\Drivers\\Batch7\\edgedriver_win64\\msedgedriver.exe");
+			drv = new EdgeDriver();
+		}
+		if(browser.equals("firefox")) {
+			System.setProperty("webdriver.gecko.driver", "D:\\Study\\Drivers\\Batch7\\geckodriver-v0.31.0-win64\\geckodriver.exe");
+			drv = new EdgeDriver();
+		}
+		return drv;
+	}	
+}
+

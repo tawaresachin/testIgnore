@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="0" failed="2" skipped="1">
+  <reporter-output>
+    <line>
+      <![CDATA[FAILED - 002]]>
+    </line>
+    <line>
+      <![CDATA[FAILED - 001]]>
+    </line>
+  </reporter-output>
+  <suite started-at="2022-11-20T13:36:04 IST" name="TestSuite" finished-at="2022-11-20T13:36:05 IST" duration-ms="1268">
+    <groups>
+    </groups>
+    <test started-at="2022-11-20T13:36:04 IST" name="VerifyLoginPage" finished-at="2022-11-20T13:36:05 IST" duration-ms="1268">
+      <class name="astasoft.flipkart.TestClasses.Flipkart.LoginPageTest">
+        <test-method is-config="true" signature="initialization()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:35:28 IST" name="initialization" finished-at="2022-11-20T13:36:04 IST" duration-ms="36426" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialization -->
+        <test-method is-config="true" signature="loginPageInstance()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:36:04 IST" name="loginPageInstance" finished-at="2022-11-20T13:36:04 IST" duration-ms="54" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginPageInstance -->
+        <test-method signature="verifyPasswordField()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:36:04 IST" name="verifyPasswordField" finished-at="2022-11-20T13:36:05 IST" duration-ms="508" status="FAIL">
+          <exception class="java.lang.IllegalArgumentException">
+            <message>
+              <![CDATA[Keys to send should be a not null CharSequence]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.IllegalArgumentException: Keys to send should be a not null CharSequence
+at org.openqa.selenium.remote.RemoteWebElement.sendKeys(RemoteWebElement.java:98)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:52)
+at com.sun.proxy.$Proxy19.sendKeys(Unknown Source)
+at astasoft.flipkart.Utilities.CustomWaits.fluentSendKey(CustomWaits.java:15)
+at astasoft.flipkart.PageClasses.LoginPage.enterPassowrd(LoginPage.java:37)
+at astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyPasswordField(LoginPageTest.java:40)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+at org.testng.TestRunner.privateRun(TestRunner.java:806)
+at org.testng.TestRunner.run(TestRunner.java:601)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.IllegalArgumentException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPasswordField -->
+        <test-method is-config="true" signature="captureTestResult(org.testng.ITestResult)[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:36:05 IST" name="captureTestResult" finished-at="2022-11-20T13:36:05 IST" duration-ms="255" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyPasswordField status=FAILURE method=LoginPageTest.verifyPasswordField()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+            <line>
+              <![CDATA[FAILED - 002]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- captureTestResult -->
+        <test-method signature="verifyUserIdField()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:36:05 IST" name="verifyUserIdField" finished-at="2022-11-20T13:36:05 IST" duration-ms="152" status="FAIL">
+          <exception class="java.lang.IllegalArgumentException">
+            <message>
+              <![CDATA[Keys to send should be a not null CharSequence]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.IllegalArgumentException: Keys to send should be a not null CharSequence
+at org.openqa.selenium.remote.RemoteWebElement.sendKeys(RemoteWebElement.java:98)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:52)
+at com.sun.proxy.$Proxy19.sendKeys(Unknown Source)
+at astasoft.flipkart.Utilities.CustomWaits.fluentSendKey(CustomWaits.java:15)
+at astasoft.flipkart.PageClasses.LoginPage.enterUserId(LoginPage.java:34)
+at astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyUserIdField(LoginPageTest.java:32)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+at org.testng.TestRunner.privateRun(TestRunner.java:806)
+at org.testng.TestRunner.run(TestRunner.java:601)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.IllegalArgumentException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyUserIdField -->
+        <test-method is-config="true" signature="captureTestResult(org.testng.ITestResult)[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:36:05 IST" name="captureTestResult" finished-at="2022-11-20T13:36:05 IST" duration-ms="176" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyUserIdField status=FAILURE method=LoginPageTest.verifyUserIdField()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+            <line>
+              <![CDATA[FAILED - 001]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- captureTestResult -->
+        <test-method signature="verifyLoginButtonIsWorking()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:36:05 IST" name="verifyLoginButtonIsWorking" finished-at="2022-11-20T13:36:05 IST" depends-on-methods="astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyUserIdField, astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyPasswordField" duration-ms="0" status="SKIP">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyLoginButtonIsWorking() on instance astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838 depends on not successfully finished methods 
+[astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyUserIdField() on instance astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838
+astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyPasswordField() on instance astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.Throwable: Method astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyLoginButtonIsWorking() on instance astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838 depends on not successfully finished methods 
+[astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyUserIdField() on instance astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838
+astasoft.flipkart.TestClasses.Flipkart.LoginPageTest.verifyPasswordField() on instance astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:150)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+at org.testng.TestRunner.privateRun(TestRunner.java:806)
+at org.testng.TestRunner.run(TestRunner.java:601)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.Throwable -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginButtonIsWorking -->
+        <test-method is-config="true" signature="navigateToHomePage()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:36:05 IST" name="navigateToHomePage" finished-at="2022-11-20T13:36:05 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateToHomePage -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:astasoft.flipkart.TestClasses.Flipkart.LoginPageTest@609e8838]" started-at="2022-11-20T13:36:06 IST" name="tearDown" finished-at="2022-11-20T13:36:06 IST" duration-ms="885" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- astasoft.flipkart.TestClasses.Flipkart.LoginPageTest -->
+    </test> <!-- VerifyLoginPage -->
+  </suite> <!-- TestSuite -->
+</testng-results>

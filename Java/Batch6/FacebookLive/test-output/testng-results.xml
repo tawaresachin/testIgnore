@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="4" passed="3" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-07-12T08:53:58 IST" name="Default suite" finished-at="2022-07-12T08:54:35 IST" duration-ms="37849">
+    <groups>
+    </groups>
+    <test started-at="2022-07-12T08:53:58 IST" name="Default test" finished-at="2022-07-12T08:54:35 IST" duration-ms="37849">
+      <class name="testScripts.FacebookLoginTest">
+        <test-method is-config="true" signature="envSetup()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:53:53 IST" name="envSetup" finished-at="2022-07-12T08:53:58 IST" duration-ms="4709" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- envSetup -->
+        <test-method is-config="true" signature="initialization()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:53:58 IST" name="initialization" finished-at="2022-07-12T08:54:05 IST" duration-ms="7096" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialization -->
+        <test-method is-config="true" signature="initTest()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:05 IST" name="initTest" finished-at="2022-07-12T08:54:07 IST" duration-ms="2307" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method is-config="true" signature="waitForTest()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:07 IST" name="waitForTest" finished-at="2022-07-12T08:54:09 IST" duration-ms="2016" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- waitForTest -->
+        <test-method signature="enterPasswordTest()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:09 IST" name="enterPasswordTest" finished-at="2022-07-12T08:54:09 IST" duration-ms="311" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- enterPasswordTest -->
+        <test-method is-config="true" signature="waitForTest()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:09 IST" name="waitForTest" finished-at="2022-07-12T08:54:11 IST" duration-ms="2013" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- waitForTest -->
+        <test-method signature="enterUserIdTest()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:11 IST" name="enterUserIdTest" finished-at="2022-07-12T08:54:12 IST" duration-ms="172" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- enterUserIdTest -->
+        <test-method is-config="true" signature="waitForTest()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:12 IST" name="waitForTest" finished-at="2022-07-12T08:54:14 IST" duration-ms="2013" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- waitForTest -->
+        <test-method signature="clickOnSubmitButtonTest()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:14 IST" name="clickOnSubmitButtonTest" finished-at="2022-07-12T08:54:14 IST" depends-on-methods="testScripts.FacebookLoginTest.enterUserIdTest, testScripts.FacebookLoginTest.enterPasswordTest" duration-ms="191" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickOnSubmitButtonTest -->
+        <test-method is-config="true" signature="waitForTest()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:14 IST" name="waitForTest" finished-at="2022-07-12T08:54:16 IST" duration-ms="2014" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- waitForTest -->
+        <test-method signature="validateNavigationToHomePage()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:16 IST" name="validateNavigationToHomePage" finished-at="2022-07-12T08:54:35 IST" depends-on-methods="testScripts.FacebookLoginTest.clickOnSubmitButtonTest" duration-ms="19572" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//*[name()='span' and text()='Sachin Taware']"}
+  (Session info: chrome=102.0.5005.115)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.3.0', revision: 'a4995e2c09*'
+System info: host: 'SACHIN-LAPTOP', ip: '192.168.1.4', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.15'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [48037ee97665df944ef61098dc0d3408, findElement {using=xpath, value=//*[name()='span' and text()='Sachin Taware']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 102.0.5005.115, chrome: {chromedriverVersion: 102.0.5005.61 (0e59bcc00cc4..., userDataDir: C:\Users\Sachin Taware\AppD...}, goog:chromeOptions: {debuggerAddress: localhost:55260}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:55260/devtoo..., se:cdpVersion: 102.0.5005.115, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 48037ee97665df944ef61098dc0d3408]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//*[name()='span' and text()='Sachin Taware']"}
+  (Session info: chrome=102.0.5005.115)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.3.0', revision: 'a4995e2c09*'
+System info: host: 'SACHIN-LAPTOP', ip: '192.168.1.4', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.15'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [48037ee97665df944ef61098dc0d3408, findElement {using=xpath, value=//*[name()='span' and text()='Sachin Taware']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 102.0.5005.115, chrome: {chromedriverVersion: 102.0.5005.61 (0e59bcc00cc4..., userDataDir: C:\Users\Sachin Taware\AppD...}, goog:chromeOptions: {debuggerAddress: localhost:55260}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:55260/devtoo..., se:cdpVersion: 102.0.5005.115, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 48037ee97665df944ef61098dc0d3408
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:167)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:142)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:569)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:387)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:379)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:70)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:39)
+at com.sun.proxy.$Proxy19.getText(Unknown Source)
+at com.FacebookLive.Pages.FacebookHomePage.isUserNamePresentOnHomePage(FacebookHomePage.java:20)
+at testScripts.FacebookLoginTest.validateNavigationToHomePage(FacebookLoginTest.java:63)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+at org.testng.TestRunner.privateRun(TestRunner.java:806)
+at org.testng.TestRunner.run(TestRunner.java:601)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateNavigationToHomePage -->
+        <test-method is-config="true" signature="cleanUp()[pri:0, instance:testScripts.FacebookLoginTest@413d1baf]" started-at="2022-07-12T08:54:35 IST" name="cleanUp" finished-at="2022-07-12T08:54:35 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cleanUp -->
+      </class> <!-- testScripts.FacebookLoginTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,169 @@
+package seleniumPerticular;
+
+import java.io.File;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.TakesScreenshot;
+
+public class ScreenShotUtility extends BaseClass {
+	
+	public static void takeScreenshotOnFailure(WebDriver driver, String screenName) {
+		try {
+		 File src = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);  //upcasting
+		 File dest = new File(Constants.SCREENSHOT_FOLDER + "/" + screenName +".jpeg");
+		 FileHandler.copy(src, dest);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void validateLogoIsDisplayed(WebDriver driver) {
+		String TC = "TC001_LogoDisplay";
+		String xpath_Logo = "//img[@class='fb_logo _8ilh img']";
+		boolean flag = SeleniumWaits.elementIsDisplayed(driver, xpath_Logo);
+		if(flag) {
+			System.out.println("Logo is displayed");
+			takeScreenshotOnFailure(driver, TC);
+		} else {
+			System.out.println("Logo is not displayed");
+		}
+	}
+	
+	public static void main(String[] args) {
+		String envPath = Constants.ENVIRONMENT_PROPERTIES;
+		String browserName = Parameterization.readProperty(envPath, "browser");
+		String webUrl = Parameterization.readProperty(envPath, "url"); 
+		WebDriver driver = intialisation(browserName);
+		driver.get(webUrl);
+		validateLogoIsDisplayed(driver);
+		
+		
+		//********quit Browser***********
+		driver.quit();
+		
+	}
+
+}
+--------------------------------------------------------------------------------------------
+package seleniumPerticular;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver.Timeouts;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class SeleniumWaits {
+	
+	// 1. Implicit wait= applicable to all elements on the web-page
+	public static Timeouts implicitWait(WebDriver driver, Duration duration) {
+		Timeouts iWait = driver.manage().timeouts().implicitlyWait(duration);
+		return iWait;
+	}
+	
+	//2.a.  Explicit wait --> Fluent wait = applicable only to specific webelement
+	public static void fluentSendKey(WebDriver driver, String xpath, String str) {
+		waitForElement(driver, xpath).sendKeys(str);	
+	}
+	
+	public static void fluentClick(WebDriver driver, String xpath) {
+		waitForElement(driver, xpath).click();
+	}
+	
+	public static void fluentSubmit(WebDriver driver, String xpath) {
+
+		waitForElement(driver, xpath).submit();
+	}
+	
+	public static boolean fluentIsEnabled(WebDriver driver, String xpath) {
+		return waitForElement(driver, xpath).isEnabled();
+	}
+	
+	public static boolean elementIsDisplayed(WebDriver driver, String xpath) {
+		return webDriverWaitForElement(driver, xpath).isDisplayed();
+	}
+	
+	public static WebElement waitForElement(WebDriver driver, String xpath) {
+		FluentWait<WebDriver> wait = new FluentWait<>(driver);
+		wait.withTimeout(Duration.ofSeconds(5));  //maximum timeOut
+		wait.pollingEvery(Duration.ofMillis(10)); //polling time
+		wait.ignoring(NoSuchElementException.class); // hold back exception maximum up to timeOut
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
+		WebElement ele = driver.findElement(By.xpath(xpath));
+		return ele;
+	}
+	
+	public static WebElement webDriverWaitForElement(WebDriver driver, String xpath) {
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+		wait.pollingEvery(Duration.ofMillis(10)); //polling time
+		wait.ignoring(NoSuchElementException.class); // hold back exception maximum up to timeOut
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
+		WebElement ele = driver.findElement(By.xpath(xpath));
+		return ele;
+	}
+	
+	public static List<WebElement> waitForElements(WebDriver driver, String xpath) {
+		//WebDriverWait wait = new WebDriverWait(WebDriver_instance,TimeOut,Polling );
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5),Duration.ofMillis(10));
+		
+		wait.ignoring(NoSuchElementException.class); // hold back exception maximum up to timeOut
+//		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
+		wait.until(ExpectedConditions
+					.and(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)),ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath))));
+	    List<WebElement> eles = driver.findElements(By.xpath(xpath));
+		return eles;
+	}
+
+}
+------------------------------------------------------------------------------------------------------------
+package seleniumPerticular;
+
+public class Constants {
+	public static final String ENVIRONMENT_PROPERTIES = "D:\\Study\\Testing Class\\Java\\Batch7\\Batch7Selenium\\src\\Resources\\Environment.properties";
+	public static final String TEST_DATA="D:\\Study\\Testing Class\\Java\\Batch7\\Batch7Selenium\\src\\Resources\\testData.xlsx";
+	public static final String SCREENSHOT_FOLDER = "D:\\Study\\Testing Class\\Java\\Batch7\\Batch7Selenium\\ScreenShots";
+}
+---------------------------------------------------------------------------------------------------------------
+//**********Environment.properties****************
+browser=chrome
+url=https://www.facebook.com
+
+-------------------------------------------------------------------------------------------------------------------
+package seleniumPerticular;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+
+public class BaseClass {
+	
+	/* To initialise/instantiate desired browser driver instance*/
+	public static WebDriver intialisation(String browser) {
+		WebDriver drv = null;
+		if(browser.equals("chrome")) {
+			//language binding & to locate and initialize browser specific driver
+			System.setProperty("webdriver.chrome.driver", "D:\\Study\\Drivers\\Batch7\\chromedriver_win32\\chromedriver.exe");
+			//create browser specific driver object
+			drv = new ChromeDriver();      // to trigger browser pointed by driver
+		}
+		if (browser.equals("edge")) {
+			System.setProperty("webdriver.edge.driver", "D:\\Study\\Drivers\\Batch7\\edgedriver_win64\\msedgedriver.exe");
+			drv = new EdgeDriver();
+		}
+		if(browser.equals("firefox")) {
+			System.setProperty("webdriver.gecko.driver", "D:\\Study\\Drivers\\Batch7\\geckodriver-v0.31.0-win64\\geckodriver.exe");
+			drv = new EdgeDriver();
+		}
+		return drv;
+	}	
+}
+------------------------------------------------------------------------------------------------------------------

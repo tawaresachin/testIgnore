@@ -1,0 +1,56 @@
+package oops;
+
+public class Overloading extends OverridingParent {
+	// Polymorphism - Method Overloading / Compile time polymorphism / early-binding 
+	//Overloading1 - method name = same + no. of arguments = same + argument types = different 
+	
+	public void addition(int a, int b) {
+		int c = a + b;
+		System.out.println("Addition is: " + c);
+	}
+
+	public void addition(int a, float b) {
+		float c = a + b;
+		System.out.println("Addition is: " + c);
+	}
+	
+	//Overloading2 - method name = same + no. of arguments = different + argument types = same 
+	public void addition(int a, int b, int d) {
+		int c = a + b + d;
+		System.out.println("Addition is: " + c);
+	}
+}
+-----------------------------------------------------------------------------
+package oops;
+
+public class OverridingParent {
+	public void addition(int a, int b) {
+		int c = a + b;
+		System.out.println("Addition is: " + c);
+	}
+	
+	public void addition(int a, int b, float d) {
+		float c = a + b + d;
+		System.out.println("Addition is: " + c);
+	}
+}
+------------------------------------------------------------------------------
+package oops;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		
+		//*****Polymorphism - Compile time (Overloading)-decided using compiler , with & without inheritance*********
+		
+		Overloading ovr = new Overloading();
+		ovr.addition(10, 10);
+		ovr.addition(10, 10.22f);
+		ovr.addition(10, 20, 30);
+		ovr.addition(10, 20, 22.22f);
+	
+		//******Polymorphism - Run time (overriding)- decided using object, compulsory with inheritance *********
+		OverridingParent ovrd = new OverridingParent();
+		ovrd.addition(10, 20);
+	}
+}

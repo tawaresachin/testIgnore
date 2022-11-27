@@ -1,0 +1,453 @@
+package astasoft.flipkart.TestClasses;
+
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+
+public class BeforeExecution {
+	/* BS     --> Once for suite
+	 * 	BT    --> Once for each test class
+	 * 	 BC   --> once for current test class
+	 *    BM  --> before each @Test
+	 *     @Test
+	 *    AM  --> after each @Test
+	 *   AC   --> once for current test class
+	 *  AT    --> once for each test class
+	 * AS     --> once for suite
+	 * 
+	 */
+	
+	
+	//suite = testClass1 + testClass2 + tetsClass3 +.....
+
+@BeforeSuite
+ public void runBeforeWholeSuite() {
+	 System.out.println("I am running before the start of suite execution");
+ }
+
+ @BeforeTest
+ public void runBeforeEachTestClass() {
+	 System.out.println("I am running before each test class in a suite");
+ }
+	
+ @AfterTest
+ public void runAfterEachTestClass() {
+	 System.out.println("I am running after each test class in as suite");
+ }
+ 
+ @AfterSuite
+ public void runAfterWholeSuite() {
+	 System.out.println("I am running after the end of suite execution");
+ }
+}
+
+--------------------------------------------------------------------------------
+package astasoft.flipkart.TestClasses;
+
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class Sample extends BeforeExecution {
+
+	@BeforeClass
+	public void instantiateObjects() {
+		System.out.println("I am running before all test for this class");
+	}
+	
+	@BeforeMethod
+	public void runBeforeTestMethod() {
+		System.out.println("I am running before each test method");
+	}
+	
+	@Test(priority=0)
+	public void testMethod1() {
+		Assert.fail();
+		System.out.println("This is test method1");
+	}
+	
+	@Test(priority=1,dependsOnMethods= {"testMethod1"})
+	public void testMethod2() {
+		System.out.println("This is test method2");
+	}
+	
+	@Test(priority=2)
+	public void testMethodX() {
+		System.out.println("This is test methodX");
+	}
+	
+	@Test(priority=3, timeOut=2000)
+	public void testMethodY() throws InterruptedException {
+		Thread.sleep(3000);
+		System.out.println("This is test methodY");
+	}
+	
+	@Test(groups= {"Sanity","Regression"})
+	public void testMethodA() {
+		System.out.println("This is test methodA");
+	}
+	
+	@Test(groups= {"Regression"})
+	public void testMethodB() {
+		System.out.println("This is test methodB");
+	}
+	
+	@Test(groups= {"Sanity","Regression"})
+	public void testMethodC() {
+		System.out.println("This is test methodC");
+	}
+	@AfterMethod
+	public void runAfterTestMethod() {
+		System.out.println("I am running after each test method");
+	}
+	
+	@AfterClass
+	public void closeAllObjects() {
+		System.out.println("I am running after all tests of this class");
+	}
+}
+
+-------------------------------------------------------------------------------------
+package astasoft.flipkart.TestClasses;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Ignore;
+import org.testng.annotations.Test;
+
+public class Sample1 extends BeforeExecution {
+
+	@BeforeClass
+	public void instantiateObjects() {
+		System.out.println("I am running before all test for this class");
+	}
+	
+	@BeforeMethod
+	public void runBeforeTestMethod() {
+		System.out.println("I am running before each test method");
+	}
+	
+	@Test(priority='a',enabled=false)
+	public void testMethod3() {
+		System.out.println("This is test method3");
+	}
+	
+	@Ignore
+	@Test (priority='b')
+	public void testMethod4() {
+		System.out.println("This is test method4");
+	}
+	
+	@AfterMethod
+	public void runAfterTestMethod() {
+		System.out.println("I am running after each test method");
+	}
+	
+	@AfterClass
+	public void closeAllObjects() {
+		System.out.println("I am running after all tests of this class");
+	}
+}
+
+
+-------------------------------------------------------------------------------
+package astasoft.flipkart.TestClasses;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Sample2 extends BeforeExecution {
+
+	@BeforeClass
+	public void instantiateObjects() {
+		System.out.println("I am running before all test for this class");
+	}
+	
+	@BeforeMethod
+	public void runBeforeTestMethod() {
+		System.out.println("I am running before each test method");
+	}
+	
+	@Test(priority=0,invocationCount=3)
+	public void testMethod5() {
+		System.out.println("This is test method5");
+	}
+	
+	@Test(priority=-1)
+	public void testMethod6() {
+		System.out.println("This is test method6");
+	}
+	
+	@AfterMethod
+	public void runAfterTestMethod() {
+		System.out.println("I am running after each test method");
+	}
+	
+	@AfterClass
+	public void closeAllObjects() {
+		System.out.println("I am running after all tests of this class");
+	}
+}
+
+------------------------------------------------------------------------------
+package astasoft.flipkart.TestClasses;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+public class Sample3 extends BeforeExecution {
+	SoftAssert soft = new SoftAssert();
+	//Hard Assert OR Validation 
+	@Test
+	public void testMethod8() {
+		String userNameFieldLabel = "userName";
+		String titleActual = "Google";
+		boolean logoDisplayed = true;
+		//Actual = null
+		Assert.assertNull(userNameFieldLabel, "UserNameField has label");
+		//Actual = True
+		Assert.assertTrue(logoDisplayed, "Logo is not displayed");
+		// Actual = Expected
+		Assert.assertEquals(titleActual, "Google1", "Title is not matching");
+		System.out.println("I am testMethod8");
+	}
+	
+	@Test
+	public void testMethod9() {
+		String submitButtonLabel = "Sumbit";
+		String titleActual = "Google1";
+		boolean ifAdditionalTextAppered = false;
+		//Actual != null
+		Assert.assertNotNull(submitButtonLabel,"Submit button has no label");
+		//Actual = False
+		Assert.assertFalse(ifAdditionalTextAppered, "Additional text appeared on page");
+		//Actual != Expected
+		Assert.assertNotEquals(titleActual, "Google1", "Wrong title is displayed");
+		System.out.println("I am testMethod9");
+	}
+	
+	@Test
+	public void testMethod10() {
+		Assert.fail();
+		System.out.println("I am testMethod 10");
+	}
+	
+	@Test
+	public void testMethod11() {
+		String additionalText = "abcd...";
+		String actualTitle = "Google";
+		boolean logoDisplayed = true;
+		// actual = null
+		soft.assertNull(additionalText, "Additional text appeared on page");
+		//actual = expected
+		soft.assertEquals(actualTitle, "Google", "Title is not matching");
+		//actual = True
+		soft.assertTrue(logoDisplayed, "Logo is not displayed");
+		soft.assertAll();
+	}
+	
+	@Test
+	public void testMethod12() {
+		String submitButtonLabel = null;
+		String titleActual = "Google1";
+		boolean ifAdditionalTextAppered = true;
+		//Actual != null
+		soft.assertNotNull(submitButtonLabel,"Submit button has no label");
+		//Actual = False
+		soft.assertFalse(ifAdditionalTextAppered, "Additional text appeared on page");
+		//Actual != Expected
+		soft.assertNotEquals(titleActual, "Google1", "Wrong title is displayed");
+		soft.assertAll();
+		System.out.println("I am testMethod9");
+	}
+}
+------------------------------------------------------------------------------
+package astasoft.flipkart.TestClasses;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.Reporter;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Sample4 {
+	@Test
+	@Parameters("url")   //Parameter --> argument --> use arg in desired method
+	public void testMethod12(String webURL) {
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();
+		driver.get(webURL);
+		Reporter.log("I am method 12", true);
+	}
+	
+	@Test
+	public void testMethod13() {
+		WebDriverManager.edgedriver().setup();
+		WebDriver driver = new EdgeDriver();
+		System.out.println("I am test method 13");
+	}
+	
+	@Test
+	public void testMethod14() {
+		System.out.println("I am test method 14");
+	}
+
+}
+
+------------------------------------------------------------------------------
+******************testng.xml******************************************
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+  
+<suite name="TestSuite" verbose="1">
+
+  <test name="LoginPageTest" >
+	<groups>
+		<run>
+			<include name="Regression"/>
+		</run>
+	</groups>
+    <classes>
+       <class name="astasoft.flipkart.TestClasses.Sample">
+       	  <methods>
+       		<exclude name="testMethodX"/>
+       	  </methods>
+       </class> 
+       <class name="astasoft.flipkart.TestClasses.Sample1"/>
+    </classes>
+  </test>
+ 
+  <test name="HomePageTest">
+    <classes>
+    	<class name="astasoft.flipkart.TestClasses.Sample2">
+    		<methods>
+    			<include name="testMethod5"/>
+    		</methods>
+    	</class>
+    	<class name="astasoft.flipkart.TestClasses.Sample3"/>
+    </classes>
+  </test>
+  
+  <test name="SamplePageTest" parallel="methods">
+  	<parameter name="url" value="https://www.google.com"/>
+  	<classes>
+  		<class name="astasoft.flipkart.TestClasses.Sample4"/>
+  	</classes >
+  </test>
+  
+</suite>
+
+-------------------------------------------------------------------
+
+******************POM.xml******************************************
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>astasoft</groupId>
+  <artifactId>flipkart</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>flipkart</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.flipkart.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+	<dependency>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-java</artifactId>
+	    <version>4.5.0</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+	<dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi-ooxml-schemas</artifactId>
+	    <version>4.1.2</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+	<dependency>
+	    <groupId>org.testng</groupId>
+	    <artifactId>testng</artifactId>
+	    <version>7.6.1</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+	<dependency>
+	    <groupId>io.github.bonigarcia</groupId>
+	    <artifactId>webdrivermanager</artifactId>
+	    <version>5.3.0</version>
+	</dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+--------------------------------------------------------------------

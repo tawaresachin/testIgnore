@@ -1,0 +1,317 @@
+package PomWithPageFactory.PageClasses;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class LoginPage {
+	WebDriver driver;
+	//WebElement ele = driver.findElement(By.xapth("...."))
+	//private --> encapsulation
+	@FindBy(xpath="//img[@alt='Facebook']") private WebElement logoOnLoginPage;
+	@FindBy(xpath="//input[@id='email']") private WebElement userName;
+	@FindBy(xpath="//input[@id='pass']") private WebElement password;
+	@FindBy(xpath="//button[@name='login']") private WebElement submitButton;
+	
+	public LoginPage(WebDriver driver) {
+		PageFactory.initElements(driver, this);
+		this.driver = driver;
+	}
+	
+	//---------------------------------------------
+	public boolean ifLoginPageTitleMatches(String expectedTitle) {
+		String title = driver.getTitle();
+		boolean flag = title.equals(expectedTitle);
+		if(!flag) {
+			System.out.println("LoginPage Title is not matching with expected value");
+		}
+		return flag;
+	}
+	public boolean ifLogoIsDisplayed() {
+	  boolean flag = logoOnLoginPage.isDisplayed();
+	  if(!flag) {
+			System.out.println("Logo on loginPage is not displayed");
+		}
+	  return flag;
+	}
+	public boolean ifUserNameFieldIsEnabled() {
+		boolean flag = userName.isEnabled();
+		return flag;
+	}
+	public boolean enterUserName(String user) {
+		boolean flag = false;
+		if(ifUserNameFieldIsEnabled()) {
+			userName.sendKeys(user);
+			flag = true;
+		} else {
+			System.out.println("userName field is not enabled");
+		}
+		return flag;
+	}
+	public boolean ifPasswordFieldIsEnabled() {
+		boolean flag = password.isEnabled();
+		return flag;
+	}
+	public boolean enterPassword(String pass) {
+		boolean flag = false;
+		if(ifPasswordFieldIsEnabled()) {
+			password.sendKeys(pass);
+			flag = true;
+		} else {
+			System.out.println("password field is not enabled");
+		}
+		return flag;
+	}
+	
+	public boolean ifSubmitButtonIsEnabled() {
+		boolean flag = submitButton.isEnabled();
+		return flag;
+	}
+	public boolean clickSubmitButton() {
+		boolean flag = false;
+		if(ifSubmitButtonIsEnabled()) {
+			submitButton.click();
+			flag = true;
+		} else {
+			System.out.println("submit button is not enabled");
+		}
+		return flag;
+	}
+}
+------------------------------------------------------------------------------------
+package PomWithPageFactory.TestClasses;
+
+import org.openqa.selenium.WebDriver;
+
+import PomWithPageFactory.PageClasses.LoginPage;
+import seleniumPerticular.BaseClass;
+import seleniumPerticular.Constants;
+import seleniumPerticular.Parameterization;
+
+public class LoginPageTest extends BaseClass{
+	LoginPage login; 
+	WebDriver driver;
+	public void getLoginPageObject() {
+		String envPath = Constants.ENVIRONMENT_PROPERTIES;
+		String browserName = Parameterization.readProperty(envPath, "browser");
+		String url = Parameterization.readProperty(envPath, "url");
+		driver = intialisation(browserName);
+		driver.get(url);
+	    login = new LoginPage(driver);
+	}
+	
+	public void validateIfGivenUrlIsOpened() {
+		boolean flag = login.ifLoginPageTitleMatches("Facebook – log in or sign u");
+		if(flag) {
+			System.out.println("Test1_validateIfGivenUrlIsOpened Passed");
+		} else {
+			System.out.println("Test1_validateIfGivenUrlIsOpened Failed");
+		}
+	}
+	
+	public void validateIfLogoIsDisplayedOnLoginPage() {
+		boolean flag = login.ifLogoIsDisplayed();
+		if(flag) {
+			System.out.println("Test2_validateIfLogoIsDisplayedOnLoginPage Passed");
+		} else {
+			System.out.println("Test2_validateIfLogoIsDisplayedOnLoginPage Failed");
+		}
+	}
+	
+	public void validateUserNameField() {
+		boolean flag = login.enterUserName("abcd");
+		if(flag) {
+			System.out.println("Test3_validateUserNameField Passed");
+		}else {
+			System.out.println("Test3_validateUserNameField Failed");
+		}
+	}
+	
+	public void validatePasswordField() {
+		boolean flag = login.enterPassword("defg");
+		if(flag) {
+			System.out.println("Test4_validatePasswordField Passed");
+		}else {
+			System.out.println("Test4_validatePasswordField Failed");
+		}
+	}
+	public void validateSubmitButton() {
+		boolean flag = login.clickSubmitButton();
+		if(flag) {
+			System.out.println("Test5_validateSubmitButton Passed");
+		}else {
+			System.out.println("Test5_validateSubmitButton Failed");
+		}
+	}
+	
+	public WebDriver onHomePage() {
+		return driver;
+	}
+	
+	public static void main(String[] args) {
+		LoginPageTest loginTest = new LoginPageTest();
+		loginTest.getLoginPageObject();
+		loginTest.validateIfGivenUrlIsOpened();
+		loginTest.validateIfLogoIsDisplayedOnLoginPage();
+		loginTest.validateUserNameField();
+		loginTest.validatePasswordField();
+		loginTest.validateSubmitButton();
+		loginTest.onHomePage();
+	}
+}
+--------------------------------------------------------------------------------------------
+package PomWithPageFactory.PageClasses;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class HomePage {
+  WebDriver driver;
+  @FindBy(xpath="")private WebElement ele;
+  // find webElements here below
+  
+  
+  
+  
+  
+  public HomePage(WebDriver driver) {
+	  PageFactory.initElements(driver, this);
+	  this.driver=driver;
+  }
+  
+  //Write methods for actions on webElements here below...
+
+}
+------------------------------------------------------------------------------------------------
+package PomWithPageFactory.TestClasses;
+
+import org.openqa.selenium.WebDriver;
+
+import PomWithPageFactory.PageClasses.HomePage;
+
+public class HomePageTest {
+	WebDriver driver;
+	HomePage home;
+	
+	public void initialisation() {
+		LoginPageTest loginTest = new LoginPageTest();
+		driver = loginTest.onHomePage();
+		home = new HomePage(driver);
+	}
+	
+	//Write Test methods here...
+	
+	
+	
+	
+	public void tearDown() {
+		driver.quit();
+	}
+	
+	public static void main(String[] args) {
+		HomePageTest homeTest = new HomePageTest();
+		homeTest.initialisation();
+		//1. Verify HomePage is opened
+		//2. VerifyAccountName is displayed
+		//3. VerifyRandomPostName 
+		//4. ....
+		homeTest.tearDown();
+	}
+
+}
+----------------------------------------------------------------------------------------------------
+package seleniumPerticular;
+
+public class Constants {
+	public static final String ENVIRONMENT_PROPERTIES = "D:\\Study\\Testing Class\\Java\\Batch7\\Batch7Selenium\\src\\Resources\\Environment.properties";
+	public static final String TEST_DATA="D:\\Study\\Testing Class\\Java\\Batch7\\Batch7Selenium\\src\\Resources\\testData.xlsx";
+	public static final String SCREENSHOT_FOLDER = "D:\\Study\\Testing Class\\Java\\Batch7\\Batch7Selenium\\ScreenShots";
+}
+
+-------------------------------------------------------------------------------------------------------
+package seleniumPerticular;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+public class Parameterization {
+	
+	//1. Parameterization using properties file
+	public static String readProperty(String path, String key) {
+		String value = null;
+		try {
+			FileInputStream file = new FileInputStream(path);
+			Properties prop = new Properties();
+			prop.load(file);
+		    value = prop.getProperty(key);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return value;
+	}
+	
+	//2. Parameterization using Excel file --> External jar "Apache POI"
+	public static Object readExcel(String path, int rowNo, int colNo) {
+		Object value = null;
+		try {
+			FileInputStream file = new FileInputStream(path);
+			//to open excel file
+			Workbook workbook = WorkbookFactory.create(file);  
+			//To open sheet
+			Sheet sheet = workbook.getSheet("Sheet1");
+			//to get the desired row
+			Row row = sheet.getRow(rowNo);
+
+			// to get desired cell at desired row & column
+			Cell cell = row.getCell(colNo);
+			
+			// to get lastRow number in a sheet
+//			int lastRow = sheet.getLastRowNum();
+			
+			// to get lastColumn in sheet
+//			short lastCol = row.getLastCellNum();
+			
+//			Cell cell = WorkbookFactory.create(file)
+//					.getSheet("Sheet1")
+//					.getRow(rowNo)
+//					.getCell(colNo);
+			
+			//to get type of value in located cell
+			CellType type = cell.getCellType();
+			
+			if(type.equals(CellType.STRING)) {
+			 value = cell.getStringCellValue();
+			}
+			if(type.equals(CellType.NUMERIC)) {
+			 value = cell.getNumericCellValue();
+			}
+			if(type.equals(CellType.BOOLEAN)) {
+			 value = cell.getBooleanCellValue();
+			}	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return value;
+	}
+
+}
+
+-------------------------------------------------------------------------------------------------------
+//**********Environment.properties file****************
+browser=chrome
+url=https://www.facebook.com
+
+---------------------------------------------------------------------------------------------------------

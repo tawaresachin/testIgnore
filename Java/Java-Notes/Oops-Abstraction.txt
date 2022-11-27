@@ -1,0 +1,114 @@
+package oops;
+
+public abstract class AbstractClass {
+	
+	//encapsulation
+	private String user;
+	private String password;
+	
+	//complete method
+	public boolean LoginPage(String user, String password) {
+		this.user = user;
+		this.password = password;
+		if(this.user.equals("testuser")&& this.password.equals("testpassword")) {
+		 System.out.println("Valid Login Credentials");
+		 return true;
+		}else {
+			System.out.println("Login failed");
+			return false;
+		}
+	}
+	
+	//abstraction - hiding actual implementation
+	//incomplete method - abstract method
+	public abstract double transaction(String user, String password, double amount);
+}
+------------------------------------------------------------------------------------
+package oops;
+
+public class ImplementAbstractClass extends AbstractClass {  //Inheritance
+	int i =100;
+	static int j = 100;
+	static final int k =100;
+	
+	//implementing abstract method from abstract class
+	@Override			//annotation - to indicate this method is being overrided
+	public double transaction(String user, String password, double amount) {
+		if(LoginPage(user, password)) {
+		double money = amount;
+		return money;
+		} else {
+			System.out.println("Invalid credentials");
+			return 0;
+		}
+	}
+	
+	public void testMethod() {
+		System.out.println("I am test method");
+	}
+}
+------------------------------------------------------------------------------------
+package oops;
+
+public interface OopsInterface {
+	// 100% abstraction --> all methods are by default abstract
+	// cannot write any complete method
+	
+	int i = 100;		// variable declared in interface is by default public, static & final (i.e. constant)
+
+	public abstract void method1();
+	
+	public void method2();		// abstract keyword is not compulsory
+
+}
+-----------------------------------------------------------------------------------
+package oops;
+
+public class ImplementationOfInterface implements OopsInterface {
+
+	@Override
+	public void method1() {
+		System.out.println("I am method-1");		
+	}
+
+	@Override
+	public void method2() {
+		System.out.println("I am method-2");		
+	}
+	
+	public void method3() {
+		System.out.println("I am additional method-3");
+	}
+}
+------------------------------------------------------------------------------------
+package oops;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		
+		//**********Abstraction*******************
+//		AbstractClass abs = new AbstractClass();   // cannot create object of abstract class
+		AbstractClass abs = new ImplementAbstractClass();
+		
+		String user = "testuser";
+		String password = "testpassword";
+		boolean flag = abs.LoginPage(user, password);
+		System.out.println("Login status: "+ flag);
+		double f = abs.transaction(user, password, 1000);
+		System.out.println("Amount transacted: " + f);
+	
+		ImplementAbstractClass impl = new ImplementAbstractClass();
+		impl.testMethod();
+		
+//		OopsInterface intr = new OopsInterface();    //cannot create object of interface
+		OopsInterface intr = new ImplementationOfInterface();
+		intr.method1();
+		intr.method2();
+		System.out.println("Variable in interface is: " + intr.i); // variable in interface is always constant
+
+		ImplementationOfInterface intImpl = new ImplementationOfInterface();
+		intImpl.method3();
+		
+	}
+}
